@@ -1,0 +1,29 @@
+{
+    "name": "farmport_backend",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "test": "DEBUG=True nyc --reporter=text env TS_NODE_PROJECT=\"tsconfig.testing.json\" NODE_ENV=\"test\" mocha --exit -r ts-node/register -r dotenv/config -r 'tests/config/hook.ts' 'tests/**/*.spec.ts' --timeout 40000",
+        "test:unit": "env TS_NODE_PROJECT=\"tsconfig.testing.json\" NODE_ENV=\"test\" mocha -r ts-node/register -r dotenv/config -r 'tests/config/hook.ts' --timeout 40000 --exit 'tests/unit/**/*.ts'",
+        "prestart": "npm run build",
+        "start": "node dist/app.js",
+        "dev": "nodemon src/app.ts",
+        "build": "tsc -p ."
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "dotenv": "^16.0.0",
+        "express": "^4.17.3",
+        "morgan": "^1.10.0"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.13",
+        "nodemon": "^2.0.15",
+        "ts-node": "^10.5.0",
+        "ts-node-dev": "^1.1.8",
+        "typescript": "^4.5.5"
+    },
+    "keywords": [],
+    "description": ""
+}
