@@ -1,23 +1,17 @@
-import mongoose, {Connection} from "mongoose";
+import mongoose, { Connection } from "mongoose";
 import { ConnectionOptions } from "tls";
-
 
 const NODE_ENV = process.env.NODE_ENV || "";
 
 let db: Connection;
-function getMongoURI() {
-    console.log("--------------------------------------------------------------------");
-    console.log(process.env.MONGODB_URI);
-    return process.env.MONGOBD_URI|| "";
-}
 
 function connectDB() {
     // DATABASE CONNECTION
-    mongoose.connect(getMongoURI(), {
+    mongoose.connect(process.env.MONGOBD_URI ?? "", {
         useNewUrlParser: true,
-        useCreateIndex: true,
+        // useCreateIndex: true,
         useUnifiedTopology: true,
-        useFindAndModify: false,
+        // useFindAndModify: false,
     } as ConnectionOptions);
 
     // MONGODB CONNECTION CHECK
