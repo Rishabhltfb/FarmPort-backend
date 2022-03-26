@@ -1,7 +1,13 @@
 import express from "express";
 import "dotenv/config";
+import connectDB from "./config/db";
 
 const app = express();
+
+if(process.env.NODE_ENV !== "test"){
+    connectDB();
+}
+
 const { PORT } = process.env;
 
 app.enable("trust proxy");
