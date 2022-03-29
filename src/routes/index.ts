@@ -13,13 +13,13 @@ router.get("/test", (req: Request, res: Response) =>
     res.send(responseAdapter.sendSuccessResponse(
         ResponseMessages.SERVER_RUNNING,
         null
-    ))
+        )
+    )
 );
 
-// router.use("/auth", require("./auth.routes"));
-// router.use("/restaurant", require("./restaurant.routes"));
-// router.use("/filter", require("./filter.routes"));
-// router.use("/user", require("./user.routes"));
-// router.use("/collection", require("./collection.routes"));
+router.use("/user", require("./user.routes"));
+router.use("/crop", require("./crop.routes"));
+router.use("/bid", require("./bid.routes"));
+
 
 module.exports = router;
