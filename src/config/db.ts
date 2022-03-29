@@ -7,7 +7,7 @@ let db: Connection;
 
 function connectDB() {
     // DATABASE CONNECTION
-    mongoose.connect(process.env.MONGOBD_URI ?? "", {
+    mongoose.connect(process.env.MONGODB_URI ?? "", {
         useNewUrlParser: true,
         // useCreateIndex: true,
         useUnifiedTopology: true,
