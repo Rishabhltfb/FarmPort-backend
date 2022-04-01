@@ -4,7 +4,6 @@ import ResponseMessages from "../../enums/response-message";
 import ResponseAdapter from "../../utils/response-adapter";
 
 const router = Router();
-
 const responseAdapter = new ResponseAdapter();
 
 // @DESC Crop test route

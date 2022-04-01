@@ -20,9 +20,12 @@ const cropSchema = new mongoose.Schema<Crop>({
     visibilityStatus:{
         type:Boolean
     },
-    
-
-
+    cropScore:{
+        type:String
+    },
+    quantity:{
+        type:Number
+    }
 })
 
 cropSchema.set("timestamps", true);

@@ -10,5 +10,6 @@ enum Errors {
     USER_UPDATE_ERR = "Error occured while updating User",
     CROP_UPDATE_ERR = "Error occured while updating Crop",
     BID_UPDATE_ERR = "Error occured while updating Bid",
+    EMAIL_ALREADY_EXIST_ERR = "User Email is already exist"
 }
 export default Errors;
