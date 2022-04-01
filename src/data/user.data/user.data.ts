@@ -25,21 +25,16 @@ export default class UserDAO{
         }
     }
 
+    // Get user by email
+    async getUserByEmail(email: string): Promise<User> {
+        return UserModel.findOne({ email }).exec();
+    }
+
     // Create a new User
     async createUser(user: User): Promise<User>{
-        let userEmail = user.email.toString();
-        let newUser;
-        try {
-            const findUser = await UserModel.findOne(
-                { userEmail }
-            )
-            if (!findUser) {
-             newUser = new UserModel(user);
-            }
-            return newUser.save();
-        } catch (err) {
-            throw new GenericError(Errors.EMAIL_ALREADY_EXIST_ERR, 500);
-        }
+        const newUser = new UserModel(user);    
+        return newUser.save();
+        
     }
 
     // Delete a user by id

@@ -18,6 +18,10 @@ export default class UserProfileService{
         return this.userDAO.createUser(User);
     }
 
+    getUserByEmail(email: string): Promise<User> {
+        return this.userDAO.getUserByEmail(email);
+    }
+
     async deleteUser(id: String): Promise<void>{
          await this.userDAO.deleteUser(id);
     }

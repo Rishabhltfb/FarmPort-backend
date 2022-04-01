@@ -51,8 +51,25 @@ router.get(
     })
 )
 
+// @DESC Get Current User By Email
+// @ROUTE GET api/v1/user/:email
+// @ACCESS
+
+router.get(
+    "/getUserByEmail",
+    expressAsyncHandler(async (req: Request, res: Response) => {
+        let email = req.query.email || "";
+        const response = await userProfileService.getUserByEmail(email?.toString());
+        res.send(
+            responseAdapter.sendSuccessResponse("Current User fetched Successfully", response)
+        )
+    })
+)
+
+
 // @DESC Update User By ID
 // @ROUTE PUT api/v1/user/:id
+// @ACCESS
 router.put("", expressAsyncHandler(async (req: Request, res: Response) => {
     const userBody = req.body;
     let id = req.query.id?.toString()|| "";
