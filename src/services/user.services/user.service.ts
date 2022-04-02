@@ -1,7 +1,5 @@
 import { StringifyOptions } from "querystring";
 import UserDAO from "../../data/user.data/user.data";
-import Errors from "../../enums/errors";
-import GenericError from "../../models/dto/generic/generic-error";
 import User from "../../models/types/user.type/user.type";
 
 export default class UserProfileService{

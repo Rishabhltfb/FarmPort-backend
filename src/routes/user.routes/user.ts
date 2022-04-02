@@ -28,7 +28,7 @@ router.get(
 // @ROUTE api/v1/user/createUser
 // @ACCESS 
 
-router.get("/createUser",
+router.post("/createUser",
     expressAsyncHandler(async (req:Request, res:Response) => {
         const userBody = req.body;
         await userProfileService.createUser(userBody);
