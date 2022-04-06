@@ -4,6 +4,28 @@ import ResponseMessages from "../../enums/response-message";
 import CropProfileService from "../../services/crop.services/crop.services";
 import ResponseAdapter from "../../utils/response-adapter";
 
+import multer, { FileFilterCallback } from 'multer';
+const cloudinary = require('cloudinary').v2;
+
+type DestinationCallback = (error: Error | null, destination: string) => void
+type FileNameCallback = (error: Error | null, filename: string) => void
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
+  });
+
+  const storage = multer.diskStorage({ 
+    destination: (req:Request, file:Express.Multer.File, cb: DestinationCallback):void => { 
+        cb(null, 'src/uploads') 
+    }, 
+    filename: (req:Request, file:Express.Multer.File, cb:FileNameCallback):void => { 
+        cb(null, file.fieldname + '-' + Date.now()) 
+    } 
+}); 
+  
+const upload = multer({ storage: storage });
 
 const router = Router();
 const responseAdapter = new ResponseAdapter();
@@ -28,9 +50,23 @@ router.get(
 // @DESC Create Crop
 // @ROUTE api/v1/crop/createUser
 // @ACCESS 
-router.post("/createCrop",
+router.post("/createCrop",upload.single('cropImage'),
     expressAsyncHandler(async (req:Request, res:Response) => {
-        const cropBody = req.body;
+        let cropBody = req.body;
+        const data = {
+            image: req.file?.path
+        }
+        console.log(cropBody);
+        console.log(data.image);
+        const result = await cloudinary.uploader.upload(data.image)
+        console.log(result);
+        //     .then((result: any) => {
+        //     console.log(result);
+        //     cropBody.image = result.url;
+        //     console.log(cropBody);
+        // })
+        cropBody.image = result.url;
+        console.log(cropBody);
         await cropProfileService.createCrop(cropBody);
         res.send(responseAdapter.sendSuccessResponse("Crop Created Successfully", cropBody));  
     })
